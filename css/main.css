@@ -1104,13 +1104,10 @@ button:focus,
 .garden-immersion-zone {
   position: relative;
   width: 100%;
-  margin: 48px 0;
-  padding: 90px 0;
-  background: 
-    linear-gradient(180deg, rgba(240, 249, 255, 0.35) 0%, rgba(236, 253, 245, 0.65) 140px, rgba(236, 253, 245, 0.65) calc(100% - 140px), rgba(240, 249, 255, 0.35) 100%),
-    url('../images/garden-animated-loop.gif') center center / cover no-repeat fixed;
-  overflow: hidden;
-  box-shadow: inset 0 20px 40px rgba(0, 0, 0, 0.06), inset 0 -20px 40px rgba(0, 0, 0, 0.06);
+  max-width: 1180px;
+  margin: 36px auto 0;
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
 .garden-wave-divider {
@@ -1138,22 +1135,20 @@ button:focus,
 }
 
 .garden-content-wrapper {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 0 24px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
   position: relative;
-  z-index: 3;
 }
 
 .garden-hero-banner {
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border-radius: 44px;
-  padding: clamp(32px, 5vw, 56px) clamp(24px, 4vw, 48px);
-  box-shadow: 
-    0 24px 60px -10px rgba(15, 30, 54, 0.16),
-    inset 0 3px 6px rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 40px;
+  border: 3.5px solid #FFFFFF;
+  padding: clamp(28px, 4vw, 44px) clamp(20px, 3.5vw, 36px);
+  box-shadow: var(--clay-shadow-hero);
   display: flex;
   flex-direction: column;
   align-items: center;
