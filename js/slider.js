@@ -5,49 +5,49 @@
 const featureDirectory = {
   campus: {
     src: 'images/preschool-campus-facade.jpg',
-    title: "Elinga's Buzzy Hub · Madipakkam Campus",
-    sub: 'MADIPAKKAM, CHENNAI · RICE-FLOUR KOLAM ENTRANCE · TROPICAL PALMS',
-    alt: "Elinga's Buzzy Hub Madipakkam Chennai campus with traditional Kolam and coconut palms"
+    title: "Elingas Buzzy Hub · Madipakkam Campus (9 AM - 9 PM)",
+    sub: 'MADIPAKKAM, CHENNAI · WWW.ELINGASBUZZYHUB.IN · CHILD-SAFE ATELIER',
+    alt: "Elingas Buzzy Hub Madipakkam Chennai campus entrance and play hub"
   },
   playschool: {
     src: 'images/feature-play-school.jpg',
-    title: '🏫 Play School & Sensory Learning',
-    sub: 'WOODEN ALPHABET BLOCKS · TAMIL & ENGLISH PHONICS · JOYFUL CIRCLES',
-    alt: 'Happy South Indian toddlers exploring wooden blocks and animal puzzles'
+    title: '🏰 Play Area · Hourly Pay-As-You-Go (Starts ₹69/hr)',
+    sub: '9:00 AM – 9:00 PM · PADDED FOAM ARENA & SOFT BALL PITS · HOURLY ACCESS',
+    alt: 'Joyful toddlers playing with tactile toys and building blocks in safe play area'
+  },
+  indoor: {
+    src: 'images/feature-safe-environment.jpg',
+    title: '🎯 Indoor Games · 365 Days a Year (Pre-Booking Basis)',
+    sub: 'OPEN 365 DAYS · ANY TIME ON PRE-BOOKING · PRIVATE FAMILY SLOTS',
+    alt: 'Kids engaged in interactive games and educational activities in a secure hall'
   },
   daycare: {
     src: 'images/feature-day-care.jpg',
-    title: '☀️ Loving Day Care & Creche',
-    sub: 'COZY COT NURSERIES · TENDER CHENNAI CAREGIVERS · HOME AWAY FROM HOME',
-    alt: 'South Indian toddlers sleeping peacefully with pastel cotton quilts'
-  },
-  safety: {
-    src: 'images/feature-safe-environment.jpg',
-    title: '🛡️ 100% Certified Child Safety',
-    sub: 'PADDED FOAM ARENA · TAMIL ALPHABET CHARTS · CHILDPROOF ACCESS',
-    alt: 'Safe childproof classroom with South Indian teacher and students'
-  },
-  activities: {
-    src: 'images/feature-fun-activities.jpg',
-    title: '🎨 Creative Arts & Fun Activities',
-    sub: 'TACTILE CLAY MODELING · FESTIVAL CRAFTS · PONGAL & DIWALI ATELIERS',
-    alt: 'South Indian children celebrating creative arts and festival crafts'
+    title: '🍼 Day Care & Personal Diary (Starts ₹150 · 6 Mos - 10 Yrs)',
+    sub: '9:00 AM – 7:00 PM · DEDICATED CARETAKER · WATER & SLEEP TRACKER DIARY',
+    alt: 'Caring caretaker tending to resting toddlers in peaceful nursery'
   },
   meals: {
     src: 'images/feature-healthy-meals.jpg',
-    title: '🥣 Wholesome & Nutritious Meals',
-    sub: 'WARM MINI IDLIS · FRESH PAPAYA & POMEGRANATE · STEEL THALI SETS',
-    alt: 'South Indian toddlers enjoying warm mini idlis and fresh fruits'
+    title: '🥣 Day Care Healthy Foods & Nutritious Snacks',
+    sub: 'FRESH FRUIT BOWLS · STEAMED IDLIS · HYGIENIC CHILD-SAFE NUTRITION',
+    alt: 'South Indian toddlers enjoying warm mini idlis and fresh wholesome fruits'
+  },
+  parties: {
+    src: 'images/kinder-brighter-world.jpg',
+    title: '🎂 Birthday Parties & Events (Mini AC Hall, Food & Gifts)',
+    sub: 'ANY TIME BY BOOKING · COZY AC PARTY HALL · FOOD & RETURN GIFTS INCLUDED',
+    alt: 'Festive celebration hall for children birthday parties and family events'
   },
   teachers: {
     src: 'images/feature-caring-teachers.jpg',
-    title: '💖 Caring & Certified Educators',
-    sub: '1:5 LOW CARE RATIO · MADIPAKKAM FACULTY · TENDER STORYBOOK CIRCLES',
-    alt: 'Warm South Indian preschool teacher in pastel cotton attire reading with children'
+    title: '💖 Dedicated Caretakers & Mentors (1:5 Ratio)',
+    sub: '1:5 LOW CARE RATIO · MADIPAKKAM EDUCATORS · PERSONAL DIARY DISPATCH',
+    alt: 'Warm educator mentoring little children with care and storybooks'
   }
 };
 
-const featureKeys = ['campus', 'playschool', 'daycare', 'safety', 'activities', 'meals', 'teachers'];
+const featureKeys = ['campus', 'playschool', 'indoor', 'daycare', 'meals', 'parties', 'teachers'];
 let currentFeatureIndex = 0;
 let slideInterval = null;
 
