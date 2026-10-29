@@ -1,82 +1,50 @@
 // ================================================================
-// ELINGA'S BUZZY HUB — IMAGE SLIDER & 3D CLAYMORPHIC ICON DOCK
+// ELINGA'S BUZZY HUB — 3D INTERACTIVE STORYBOOK / FLIPBOOK CONTROLLER
 // ================================================================
 
-const featureDirectory = {
-  campus: {
-    src: 'images/preschool-campus-facade.jpg',
-    title: "Elingas Buzzy Hub · Madipakkam Campus (9 AM - 9 PM)",
-    sub: 'MADIPAKKAM, CHENNAI · WWW.ELINGASBUZZYHUB.IN · CHILD-SAFE ATELIER',
-    alt: "Elingas Buzzy Hub Madipakkam Chennai campus entrance and play hub"
-  },
-  playschool: {
-    src: 'images/feature-play-school.jpg',
-    title: '🏰 Play Area · Hourly Pay-As-You-Go (Starts ₹69/hr)',
-    sub: '9:00 AM – 9:00 PM · PADDED FOAM ARENA & SOFT BALL PITS · HOURLY ACCESS',
-    alt: 'Joyful toddlers playing with tactile toys and building blocks in safe play area'
-  },
-  indoor: {
-    src: 'images/feature-safe-environment.jpg',
-    title: '🎯 Indoor Games · 365 Days a Year (Pre-Booking Basis)',
-    sub: 'OPEN 365 DAYS · ANY TIME ON PRE-BOOKING · PRIVATE FAMILY SLOTS',
-    alt: 'Kids engaged in interactive games and educational activities in a secure hall'
-  },
-  daycare: {
-    src: 'images/feature-day-care.jpg',
-    title: '🍼 Day Care & Personal Diary (Starts ₹150 · 6 Mos - 10 Yrs)',
-    sub: '9:00 AM – 7:00 PM · DEDICATED CARETAKER · WATER & SLEEP TRACKER DIARY',
-    alt: 'Caring caretaker tending to resting toddlers in peaceful nursery'
-  },
-  meals: {
-    src: 'images/feature-healthy-meals.jpg',
-    title: '🥣 Day Care Healthy Foods & Nutritious Snacks',
-    sub: 'FRESH FRUIT BOWLS · STEAMED IDLIS · HYGIENIC CHILD-SAFE NUTRITION',
-    alt: 'South Indian toddlers enjoying warm mini idlis and fresh wholesome fruits'
-  },
-  parties: {
-    src: 'images/kinder-brighter-world.jpg',
-    title: '🎂 Birthday Parties & Events (Mini AC Hall, Food & Gifts)',
-    sub: 'ANY TIME BY BOOKING · COZY AC PARTY HALL · FOOD & RETURN GIFTS INCLUDED',
-    alt: 'Festive celebration hall for children birthday parties and family events'
-  },
-  teachers: {
-    src: 'images/feature-caring-teachers.jpg',
-    title: '💖 Dedicated Caretakers & Mentors (1:5 Ratio)',
-    sub: '1:5 LOW CARE RATIO · MADIPAKKAM EDUCATORS · PERSONAL DIARY DISPATCH',
-    alt: 'Warm educator mentoring little children with care and storybooks'
-  }
-};
+const bookPages = [
+  { feature: 'campus', title: '📖 Storybook: Campus Entrance' },
+  { feature: 'playschool', title: '🏰 Storybook: Play Area (₹69/hr)' },
+  { feature: 'indoor', title: '🎯 Storybook: Indoor Games (365 Days)' },
+  { feature: 'daycare', title: '🍼 Storybook: Day Care & Personal Diary' },
+  { feature: 'meals', title: '🥣 Storybook: Healthy Foods & Nutrition' },
+  { feature: 'parties', title: '🎂 Storybook: Birthday Parties & AC Hall' },
+  { feature: 'teachers', title: '💖 Storybook: Dedicated Mentors (1:5)' }
+];
 
-const featureKeys = ['campus', 'playschool', 'indoor', 'daycare', 'meals', 'parties', 'teachers'];
-let currentFeatureIndex = 0;
-let slideInterval = null;
+let currentBookPage = 0;
+const totalBookPages = bookPages.length;
+let bookAutoTimer = null;
 
-// Core Synchronized Feature Selection Handler
-function triggerFeatureSelect(featureKey) {
-  const data = featureDirectory[featureKey];
-  if (!data) return;
+// Flip to a specific page index (0 to totalBookPages - 1)
+function flipToPage(targetPageIndex) {
+  if (targetPageIndex < 0) targetPageIndex = 0;
+  if (targetPageIndex >= totalBookPages) targetPageIndex = totalBookPages - 1;
 
-  currentFeatureIndex = featureKeys.indexOf(featureKey);
-  if (currentFeatureIndex === -1) currentFeatureIndex = 0;
+  currentBookPage = targetPageIndex;
 
-  const mainImg = document.getElementById('mainHeroImg');
+  const pages = document.querySelectorAll('.flipbook-page');
+  pages.forEach((page) => {
+    const pageNum = parseInt(page.getAttribute('data-page'), 10);
+    if (pageNum < targetPageIndex) {
+      // Pages before the target are flipped over to the left
+      page.classList.add('flipped');
+    } else {
+      // Current and subsequent pages remain facing forward
+      page.classList.remove('flipped');
+    }
+  });
+
+  // Update Chapter Title Indicator
   const titleEl = document.getElementById('facadeTitle');
-
-  if (mainImg) {
-    mainImg.style.opacity = '0.25';
-    mainImg.style.transform = 'scale(0.98)';
-    setTimeout(() => {
-      mainImg.src = data.src;
-      mainImg.alt = data.alt;
-      if (titleEl) titleEl.textContent = data.title;
-      mainImg.style.opacity = '1';
-      mainImg.style.transform = 'scale(1)';
-    }, 160);
+  if (titleEl && bookPages[currentBookPage]) {
+    titleEl.textContent = bookPages[currentBookPage].title;
   }
 
-  // Synchronize and highlight matching icon-only button sitting on top of images
-  document.querySelectorAll('.feat-overlay-btn').forEach(btn => {
-    if (btn.getAttribute('data-feature') === featureKey) {
+  // Update Active State on Chapter Bookmark Navigation Dock
+  const currentFeature = bookPages[currentBookPage].feature;
+  document.querySelectorAll('.feat-overlay-btn').forEach((btn) => {
+    if (btn.getAttribute('data-feature') === currentFeature) {
       btn.classList.add('active');
     } else {
       btn.classList.remove('active');
@@ -84,47 +52,105 @@ function triggerFeatureSelect(featureKey) {
   });
 }
 
-function slideFeatureNext() {
-  currentFeatureIndex = (currentFeatureIndex + 1) % featureKeys.length;
-  triggerFeatureSelect(featureKeys[currentFeatureIndex]);
+// Flip forward one page
+function flipNextPage() {
+  if (currentBookPage < totalBookPages - 1) {
+    flipToPage(currentBookPage + 1);
+  } else {
+    // Loop back to beginning of storybook
+    flipToPage(0);
+  }
 }
 
-function slideFeaturePrev() {
-  currentFeatureIndex = (currentFeatureIndex - 1 + featureKeys.length) % featureKeys.length;
-  triggerFeatureSelect(featureKeys[currentFeatureIndex]);
+// Flip backward one page
+function flipPrevPage() {
+  if (currentBookPage > 0) {
+    flipToPage(currentBookPage - 1);
+  } else {
+    // Jump to the final page
+    flipToPage(totalBookPages - 1);
+  }
 }
 
-// Bind clicks for the floating icon-only overlay dock on top of the image
-document.querySelectorAll('.feat-overlay-btn').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    const feat = btn.getAttribute('data-feature');
-    triggerFeatureSelect(feat);
-    resetAutoSlide();
-  });
+// Handle tap / click anywhere on the book container
+function handleBookClick(event) {
+  // If user clicked a chapter button or navigation arrow, don't trigger book body flip
+  if (event.target.closest('.feat-overlay-btn') || event.target.closest('.gallery-nav-arrow') || event.target.closest('.turn-hint')) {
+    return;
+  }
+
+  const rect = event.currentTarget.getBoundingClientRect();
+  const clickX = event.clientX - rect.left;
+
+  // Clicking on the right 60% of the book flips forward; clicking left 40% flips back
+  if (clickX > rect.width * 0.4) {
+    flipNextPage();
+  } else {
+    flipPrevPage();
+  }
+}
+
+// Compatibility helper so external buttons (e.g. from service cards or garden) can open the book to a feature
+function triggerFeatureSelect(featureKey) {
+  const targetIndex = bookPages.findIndex(p => p.feature === featureKey);
+  if (targetIndex !== -1) {
+    flipToPage(targetIndex);
+    // Smoothly scroll to the book if not currently in view
+    const bookEl = document.getElementById('buzzyFlipbook');
+    if (bookEl) {
+      bookEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+}
+
+// Touch swipe gesture support for mobile devices
+let touchStartX = 0;
+let touchEndX = 0;
+
+const flipbookElement = document.getElementById('buzzyFlipbook');
+if (flipbookElement) {
+  flipbookElement.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  flipbookElement.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleBookSwipe();
+  }, { passive: true });
+}
+
+function handleBookSwipe() {
+  const swipeDistance = touchStartX - touchEndX;
+  // Swipe left: turn forward (minimum 40px threshold)
+  if (swipeDistance > 40) {
+    flipNextPage();
+  } 
+  // Swipe right: turn backward
+  else if (swipeDistance < -40) {
+    flipPrevPage();
+  }
+}
+
+// Gentle ambient auto-turn every 7 seconds, pausing when user hovers or interacts
+function startBookAutoTurn() {
+  bookAutoTimer = setInterval(() => {
+    flipNextPage();
+  }, 7000);
+}
+
+function stopBookAutoTurn() {
+  if (bookAutoTimer) clearInterval(bookAutoTimer);
+}
+
+const bookCard = document.querySelector('.hero-flipbook-card');
+if (bookCard) {
+  bookCard.addEventListener('mouseenter', stopBookAutoTurn);
+  bookCard.addEventListener('mouseleave', startBookAutoTurn);
+  bookCard.addEventListener('touchstart', stopBookAutoTurn, { passive: true });
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+  flipToPage(0);
+  startBookAutoTurn();
 });
-
-// Auto-advance sliding images every 6 seconds, pausing on hover
-function startAutoSlide() {
-  slideInterval = setInterval(() => {
-    slideFeatureNext();
-  }, 6000);
-}
-
-function resetAutoSlide() {
-  if (slideInterval) clearInterval(slideInterval);
-  startAutoSlide();
-}
-
-const heroFacadeCard = document.querySelector('.hero-facade-card');
-if (heroFacadeCard) {
-  heroFacadeCard.addEventListener('mouseenter', () => {
-    if (slideInterval) clearInterval(slideInterval);
-  });
-  heroFacadeCard.addEventListener('mouseleave', () => {
-    startAutoSlide();
-  });
-}
-
-// Start auto slide
-startAutoSlide();

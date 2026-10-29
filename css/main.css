@@ -2483,3 +2483,266 @@ input, select, textarea {
   background: #FFFFFF;
   box-shadow: 0 6px 16px rgba(16, 185, 129, 0.14);
 }
+
+/* ================================================================
+   INTERACTIVE 3D STORYBOOK / FLIPBOOK COMPONENT
+   ================================================================ */
+
+.hero-flipbook-card {
+  perspective: 2000px;
+  -webkit-perspective: 2000px;
+  background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.85) 0%, rgba(240, 249, 255, 0.75) 100%) !important;
+  box-shadow: 
+    0 24px 50px -10px rgba(15, 30, 54, 0.22),
+    0 8px 16px rgba(0, 0, 0, 0.05),
+    inset 0 3px 6px rgba(255, 255, 255, 0.98) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.book-stage {
+  width: 100%;
+  height: 100%;
+  min-height: 520px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 2400px;
+  -webkit-perspective: 2400px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* Book Spine / Binding Left Effect */
+.book-spine {
+  position: absolute;
+  left: 18px;
+  top: 24px;
+  bottom: 24px;
+  width: 16px;
+  background: linear-gradient(90deg, #92400E 0%, #B45309 30%, #D97706 70%, #78350F 100%);
+  border-radius: 8px 0 0 8px;
+  z-index: 20;
+  box-shadow: 
+    inset -2px 0 4px rgba(0, 0, 0, 0.4),
+    4px 0 10px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .book-spine {
+    left: 10px;
+    width: 10px;
+  }
+}
+
+/* 3D Book Container */
+.flipbook-container {
+  width: 90%;
+  height: 480px;
+  max-width: 620px;
+  position: relative;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  margin-left: 14px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .book-stage {
+    min-height: 420px !important;
+    padding: 10px;
+  }
+  .flipbook-container {
+    width: 92%;
+    height: 380px !important;
+    margin-left: 8px;
+  }
+}
+
+/* Individual Flipbook Page */
+.flipbook-page {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: left center;
+  -webkit-transform-origin: left center;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform 0.85s cubic-bezier(0.25, 1, 0.35, 1), box-shadow 0.85s ease;
+  will-change: transform;
+  border-radius: 4px 24px 24px 4px;
+}
+
+/* Flipped Page State */
+.flipbook-page.flipped {
+  transform: rotateY(-180deg);
+  pointer-events: none;
+}
+
+/* Page Faces (Front & Back) */
+.page-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 4px 24px 24px 4px;
+  overflow: hidden;
+}
+
+/* Front Face: Displays the Photo and Details */
+.page-front {
+  background: #FFFFFF;
+  box-shadow: 
+    0 12px 30px rgba(15, 30, 54, 0.18),
+    inset -3px 0 8px rgba(0, 0, 0, 0.08),
+    inset 2px 0 4px rgba(255, 255, 255, 0.8);
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+}
+
+.page-img-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.book-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.flipbook-page:hover .book-photo-img {
+  transform: scale(1.03);
+}
+
+/* Page Details / Caption Overlay at Bottom */
+.page-caption-overlay {
+  position: absolute;
+  bottom: 0;
+  inset-inline: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.75) 40%, rgba(15, 23, 42, 0.94) 100%);
+  padding: 44px 24px 20px 24px;
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  pointer-events: none;
+}
+
+.page-badge {
+  align-self: flex-start;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 800;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #FEF08A;
+  margin-bottom: 2px;
+}
+
+.page-caption-overlay h4 {
+  font-family: var(--font-display);
+  font-size: clamp(17px, 2.2vw, 22px);
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.page-caption-overlay p {
+  font-size: clamp(12px, 1.3vw, 13.5px);
+  color: #E2E8F0;
+  margin: 0;
+  line-height: 1.35;
+}
+
+/* Tap to turn visual cue at bottom right of page */
+.turn-hint {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #0F172A;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 5px 12px;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  pointer-events: auto;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.turn-hint:hover {
+  background: #FFDD33;
+  color: #78350F;
+  transform: scale(1.05);
+}
+
+/* Back Face: Parchment Page Texture with Center Watermark */
+.page-back {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  background: linear-gradient(135deg, #FEF9C3 0%, #FEF08A 50%, #FDE047 100%);
+  border-radius: 24px 4px 4px 24px;
+  box-shadow: 
+    inset 4px 0 10px rgba(0, 0, 0, 0.12),
+    0 12px 30px rgba(15, 30, 54, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-paper-texture {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(254, 240, 138, 0.2) 100%);
+  gap: 12px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.watermark-bee {
+  font-size: 56px;
+  opacity: 0.35;
+  filter: grayscale(20%);
+}
+
+.back-leaf-tag {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 800;
+  color: #854D0E;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+}
+
+/* Storybook Specific Dock & Indicator Adjustments */
+.book-scene-badge {
+  top: 18px;
+  left: 20px;
+  z-index: 25;
+}
+
+.book-chapter-dock {
+  bottom: 16px;
+  z-index: 30;
+}

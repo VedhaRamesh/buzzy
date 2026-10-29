@@ -122,44 +122,198 @@
     </section>
 
     <!-- Column 2: Wide Sliding Image Gallery with Floating Feature Overlay -->
-    <section class="hero-facade-card">
-      <div class="facade-img-wrap">
-        <img id="mainHeroImg" src="images/preschool-campus-facade.jpg" alt="Elinga's Buzzy Hub High-Resolution Preschool Campus" class="facade-main-img"/>
+    <!-- Column 2: Interactive 3D Flipbook Experience -->
+    <section class="hero-facade-card hero-flipbook-card">
+      <div class="book-stage">
+        <div class="book-spine"></div>
         
-        <!-- Live Scene Indicator Badge (Top-Left of Image) -->
-        <div class="facade-scene-badge">
-          <span class="badge-dot"></span>
-          <strong id="facadeTitle">Elinga's Buzzy Hub · Madipakkam Campus</strong>
+        <!-- Interactive 3D Book Container -->
+        <div class="flipbook-container" id="buzzyFlipbook" onclick="handleBookClick(event)">
+          
+          <!-- Page 0: Campus Cover -->
+          <div class="flipbook-page" data-page="0" data-feature="campus" style="z-index: 7;">
+            <div class="page-face page-front">
+              <div class="page-img-wrap">
+                <img src="images/preschool-campus-facade.jpg" alt="Elingas Buzzy Hub Campus Entrance" class="book-photo-img"/>
+                <div class="page-caption-overlay">
+                  <span class="page-badge">🏫 Campus Tour</span>
+                  <h4>Elingas Buzzy Hub · Madipakkam</h4>
+                  <p>A certified child-safe early learning &amp; activity center</p>
+                </div>
+                <div class="turn-hint">Tap right to turn ➔</div>
+              </div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-paper-texture">
+                <span class="watermark-bee">🐝</span>
+                <span class="back-leaf-tag">Buzzy Storybook · Page 1</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Page 1: Play Area -->
+          <div class="flipbook-page" data-page="1" data-feature="playschool" style="z-index: 6;">
+            <div class="page-face page-front">
+              <div class="page-img-wrap">
+                <img src="images/feature-play-school.jpg" alt="Play Area safe foam arena" class="book-photo-img"/>
+                <div class="page-caption-overlay">
+                  <span class="page-badge">🏰 Play Area · ₹69/hr</span>
+                  <h4>Hourly Pay-As-You-Go Arena</h4>
+                  <p>9:00 AM – 9:00 PM · Padded foam wonderland &amp; soft play</p>
+                </div>
+                <div class="turn-hint">Tap right to turn ➔</div>
+              </div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-paper-texture">
+                <span class="watermark-bee">🐝</span>
+                <span class="back-leaf-tag">Buzzy Storybook · Page 2</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Page 2: Indoor Games -->
+          <div class="flipbook-page" data-page="2" data-feature="indoor" style="z-index: 5;">
+            <div class="page-face page-front">
+              <div class="page-img-wrap">
+                <img src="images/feature-safe-environment.jpg" alt="Indoor Games 365 days" class="book-photo-img"/>
+                <div class="page-caption-overlay">
+                  <span class="page-badge">🎯 Indoor Games</span>
+                  <h4>365 Days a Year · Pre-Booking</h4>
+                  <p>Dedicated family &amp; child games in a private reserved hall</p>
+                </div>
+                <div class="turn-hint">Tap right to turn ➔</div>
+              </div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-paper-texture">
+                <span class="watermark-bee">🐝</span>
+                <span class="back-leaf-tag">Buzzy Storybook · Page 3</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Page 3: Day Care & Personal Diary -->
+          <div class="flipbook-page" data-page="3" data-feature="daycare" style="z-index: 4;">
+            <div class="page-face page-front">
+              <div class="page-img-wrap">
+                <img src="images/feature-day-care.jpg" alt="Day Care peaceful rest" class="book-photo-img"/>
+                <div class="page-caption-overlay">
+                  <span class="page-badge">🍼 Day Care · Starts ₹150</span>
+                  <h4>Loving Care &amp; Personal Diary</h4>
+                  <p>6 Mos – 10 Yrs · Hourly water &amp; sleep logs synced to parents</p>
+                </div>
+                <div class="turn-hint">Tap right to turn ➔</div>
+              </div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-paper-texture">
+                <span class="watermark-bee">🐝</span>
+                <span class="back-leaf-tag">Buzzy Storybook · Page 4</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Page 4: Healthy Meals -->
+          <div class="flipbook-page" data-page="4" data-feature="meals" style="z-index: 3;">
+            <div class="page-face page-front">
+              <div class="page-img-wrap">
+                <img src="images/feature-healthy-meals.jpg" alt="Healthy Foods and meals" class="book-photo-img"/>
+                <div class="page-caption-overlay">
+                  <span class="page-badge">🥣 Nutrition Included</span>
+                  <h4>Healthy Foods &amp; Warm Snacks</h4>
+                  <p>Fresh fruit purees, warm mini idlis &amp; wholesome meals</p>
+                </div>
+                <div class="turn-hint">Tap right to turn ➔</div>
+              </div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-paper-texture">
+                <span class="watermark-bee">🐝</span>
+                <span class="back-leaf-tag">Buzzy Storybook · Page 5</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Page 5: Birthday Parties -->
+          <div class="flipbook-page" data-page="5" data-feature="parties" style="z-index: 2;">
+            <div class="page-face page-front">
+              <div class="page-img-wrap">
+                <img src="images/kinder-brighter-world.jpg" alt="Birthday parties in mini AC hall" class="book-photo-img"/>
+                <div class="page-caption-overlay">
+                  <span class="page-badge">🎂 Parties &amp; Events</span>
+                  <h4>Mini AC Hall · Food &amp; Return Gifts</h4>
+                  <p>Unforgettable birthday celebrations &amp; family get-togethers</p>
+                </div>
+                <div class="turn-hint">Tap right to turn ➔</div>
+              </div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-paper-texture">
+                <span class="watermark-bee">🐝</span>
+                <span class="back-leaf-tag">Buzzy Storybook · Page 6</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Page 6: Dedicated Caretakers (Final Page) -->
+          <div class="flipbook-page" data-page="6" data-feature="teachers" style="z-index: 1;">
+            <div class="page-face page-front">
+              <div class="page-img-wrap">
+                <img src="images/feature-caring-teachers.jpg" alt="Dedicated caretakers 1:5 ratio" class="book-photo-img"/>
+                <div class="page-caption-overlay">
+                  <span class="page-badge">💖 Dedicated Mentors</span>
+                  <h4>1:5 Individualized Caregiver Ratio</h4>
+                  <p>Warm certified mentors nurturing quiet toddlers &amp; active kids</p>
+                </div>
+                <div class="turn-hint" onclick="flipToPage(0); event.stopPropagation();">↺ Flip back to start</div>
+              </div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-paper-texture">
+                <span class="watermark-bee">🐝</span>
+                <span class="back-leaf-tag">Buzzy Storybook · Back Cover</span>
+              </div>
+            </div>
+          </div>
+
         </div>
 
-        <!-- Gallery Next/Prev Navigation Arrows -->
-        <button class="gallery-nav-arrow arrow-prev" onclick="slideFeaturePrev()" aria-label="Previous Slide">‹</button>
-        <button class="gallery-nav-arrow arrow-next" onclick="slideFeatureNext()" aria-label="Next Slide">›</button>
+        <!-- Book Header Title Badge -->
+        <div class="facade-scene-badge book-scene-badge">
+          <span class="badge-dot"></span>
+          <strong id="facadeTitle">📖 Storybook: Campus Entrance</strong>
+        </div>
 
-                <!-- Icon-Only Feature Selection Dock (Directly Overlaid on Sliding Images) -->
-        <nav class="facade-floating-menu" aria-label="Campus Feature Showcase">
-          <button class="feat-overlay-btn active" data-feature="campus" title="Campus Entrance" aria-label="Campus Entrance">
+        <!-- Page Turning Action Arrows -->
+        <button class="gallery-nav-arrow arrow-prev" onclick="flipPrevPage()" aria-label="Previous Page">‹</button>
+        <button class="gallery-nav-arrow arrow-next" onclick="flipNextPage()" aria-label="Next Page">›</button>
+
+        <!-- Chapter Bookmark Navigation Dock -->
+        <nav class="facade-floating-menu book-chapter-dock" aria-label="Book Chapter Navigation">
+          <button class="feat-overlay-btn active" data-feature="campus" onclick="flipToPage(0)" title="Campus Entrance" aria-label="Campus Entrance">
             <span class="feat-ico">🏫</span>
           </button>
-          <button class="feat-overlay-btn" data-feature="playschool" title="Play Area (₹69/hr)" aria-label="Play Area">
+          <button class="feat-overlay-btn" data-feature="playschool" onclick="flipToPage(1)" title="Play Area (₹69/hr)" aria-label="Play Area">
             <span class="feat-ico">🏰</span>
           </button>
-          <button class="feat-overlay-btn" data-feature="indoor" title="Indoor Games (365 Days)" aria-label="Indoor Games">
+          <button class="feat-overlay-btn" data-feature="indoor" onclick="flipToPage(2)" title="Indoor Games (365 Days)" aria-label="Indoor Games">
             <span class="feat-ico">🎯</span>
           </button>
-          <button class="feat-overlay-btn" data-feature="daycare" title="Day Care (From ₹150)" aria-label="Day Care">
+          <button class="feat-overlay-btn" data-feature="daycare" onclick="flipToPage(3)" title="Day Care (From ₹150)" aria-label="Day Care">
             <span class="feat-ico">🍼</span>
           </button>
-          <button class="feat-overlay-btn" data-feature="meals" title="Healthy Foods Included" aria-label="Healthy Foods">
+          <button class="feat-overlay-btn" data-feature="meals" onclick="flipToPage(4)" title="Healthy Foods Included" aria-label="Healthy Foods">
             <span class="feat-ico">🥣</span>
           </button>
-          <button class="feat-overlay-btn" data-feature="parties" title="Birthday Parties &amp; AC Hall" aria-label="Parties &amp; Events">
+          <button class="feat-overlay-btn" data-feature="parties" onclick="flipToPage(5)" title="Birthday Parties &amp; AC Hall" aria-label="Parties &amp; Events">
             <span class="feat-ico">🎂</span>
           </button>
-          <button class="feat-overlay-btn" data-feature="teachers" title="Dedicated Caretakers" aria-label="Dedicated Caretakers">
+          <button class="feat-overlay-btn" data-feature="teachers" onclick="flipToPage(6)" title="Dedicated Caretakers" aria-label="Dedicated Caretakers">
             <span class="feat-ico">💖</span>
           </button>
         </nav>
+
       </div>
     </section>
 
