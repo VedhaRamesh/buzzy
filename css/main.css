@@ -73,7 +73,7 @@ body {
   position: relative;
 }
 
-/* Seamless fixed GPU-accelerated backdrop layer (ensures smooth playback on mobile & desktop) */
+/* Seamless fixed GPU-accelerated backdrop layer (Full Video & Animation Support) */
 .site-animated-backdrop {
   position: fixed;
   inset: 0;
@@ -81,11 +81,32 @@ body {
   height: 100vh;
   z-index: -20;
   pointer-events: none;
-  background: 
-    linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.16) 420px, rgba(255, 255, 255, 0.26) 900px, rgba(255, 255, 255, 0.44) 100%),
-    url('../images/garden-animated-loop.gif') no-repeat top center / cover;
+  overflow: hidden;
+  background: #EBF8FF;
   transform: translate3d(0, 0, 0);
   will-change: transform;
+}
+
+.site-animated-backdrop .bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.site-animated-backdrop .bg-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.16) 420px, rgba(255, 255, 255, 0.26) 900px, rgba(255, 255, 255, 0.44) 100%);
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* ================================================================
