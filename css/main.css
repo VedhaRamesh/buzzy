@@ -67,9 +67,7 @@ html {
 /* Full website animated garden background with vibrant children playing on sides */
 body {
   min-height: 100vh;
-  background: 
-    linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.16) 420px, rgba(255, 255, 255, 0.26) 900px, rgba(255, 255, 255, 0.44) 100%),
-    url('../images/garden-animated-loop.gif') no-repeat top center / cover fixed;
+  background: transparent;
   color: var(--navy-dark);
   overflow-x: hidden;
   position: relative;
